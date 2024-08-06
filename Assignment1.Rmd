@@ -1,0 +1,105 @@
+---
+title: "Assignment-1"
+author: "LINGESHWARI  M"
+date: "2024-07-10"
+output: html_document
+---
+
+
+```{r}
+data("Auto")
+```
+
+```{r}
+?Auto
+```
+
+```{r}
+View(Auto)
+```
+
+```{r}
+Auto <- na.omit(Auto)
+```
+
+```{r}
+head(Auto)
+```
+
+```{r}
+quantitative_var <- sapply(Auto, is.numeric)
+qualitative_var <- !quantitative_var
+
+quantitative_var <- names(Auto)[quantitative_var]
+qualitative_var <- names(Auto)[qualitative_var]
+
+cat("Quantitative predictors:", quantitative_var, "\n")
+cat("Qualitative predictors:", qualitative_var, "\n")
+
+```
+
+```{r}
+quantitative_summary <- data.frame(
+  Predictor = quantitative_var,
+  Range = sapply(Auto[quantitative_var], function(x) range(x, na.rm = TRUE)),
+  Mean = sapply(Auto[quantitative_var], mean, na.rm = TRUE),
+  SD = sapply(Auto[quantitative_var], sd, na.rm = TRUE)
+)
+
+print(quantitative_summary)
+
+```
+
+```{r}
+pairs(Auto[quantitative_var])
+
+```
+
+```{r}
+library(ggplot2)
+```
+
+
+
+```{r}
+ggplot(Auto, aes(x = horsepower, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "Horsepower vs MPG")
+
+
+```
+
+```{r}
+ggplot(Auto, aes(x = weight, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "Weight vs MPG")
+```
+
+```{r}
+ggplot(Auto, aes(x = displacement, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(title = "Displacement vs MPG")
+```
+
+```{r}
+useful_predictors <- c("horsepower", "weight", "displacement")
+
+cat("Useful predictors for predicting mpg:", useful_predictors, "\n")
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
+
+
+
